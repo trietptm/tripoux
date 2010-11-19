@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+ <html>
+   <head>
+     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+     <script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script>
+	  <script src="./filter.js" type="text/javascript"></script> 
+	  <script src="timeline.js" type="text/javascript"></script> 
+	<link rel='stylesheet' href='styles.css' type='text/css' />
+
+   </head>
+   <script>
+   
+	var tl;
+	var eventSource = new Timeline.DefaultEventSource();
+	var theme = Timeline.ClassicTheme.create();
+	theme.event.bubble.width = 500;
+    theme.event.bubble.maxHeight = 2000;
+	
+
+	
+	function onLoad() {
+	   var bandInfos = [
+		 Timeline.createHotZoneBandInfo({
+		 zones: [
+		 // Here will be the zones
+			 ],
+			eventSource:    eventSource,
+			date:           "1970",
+			 width:          "80%", 
+			 intervalUnit:   Timeline.DateTime.HOUR, 
+			 intervalPixels: 800,
+			 theme:          theme
+		 }),
+		 Timeline.createBandInfo({
+			overview:       true,
+			eventSource:    eventSource,
+			date:           "1970",
+			width:          "20%", 
+			intervalUnit:   Timeline.DateTime.MONTH, 
+			intervalPixels: 1000
+		 })
+	   ];
+			
+	   bandInfos[1].syncWith = 0;
+	   bandInfos[1].highlight = true;
+	   
+	   
+	   tl = Timeline.create(document.getElementById("tl"), bandInfos);
+	   var url = '.';
+	   try {
+			eventSource.loadJSON(wave0, url); 
+			eventSource.loadJSON(wave0LOOP, '.');
+			}
+        catch (error) {
+           // alert('Error:' + error);
+			}
+	   setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1], theme);    
+	   setupAntiFilterHighlightControls(document.getElementById("controls"), tl, [0,1], theme);    
+	 }
+
+	var resizeTimerID = null;
+	function onResize() {
+		 if (resizeTimerID == null) {
+			 resizeTimerID = window.setTimeout(function() {
+				 resizeTimerID = null;
+				 tl.layout();
+			 }, 500);
+		 }
+	 }
+	 
+    function centerTimelineByInstruction(instructions) {
+			d = new Date();
+			d.setTime(instructions*1000);
+            tl.getBand(0).setCenterVisibleDate(d);
+        }
+		
+	function centerTimelineByDate(d) {
+            tl.getBand(0).setCenterVisibleDate(d);
+        }
+		
+	function waveCode(id) {
+        try {
+			eventSource.clear()
+			if (id == 0)
+			{
+				eventSource.loadJSON(wave0, '.');
+				eventSource.loadJSON(wave0LOOP, '.');
+			}
+			if (id == 1)
+			{
+				eventSource.loadJSON(wave1, '.');
+				eventSource.loadJSON(wave1LOOP, '.');
+			}
+			if (id == 2)
+			{
+				eventSource.loadJSON(wave2, '.');
+				eventSource.loadJSON(wave2LOOP, '.');
+			}
+			if (id == 3)
+			{
+				eventSource.loadJSON(wave3, '.');
+				eventSource.loadJSON(wave3LOOP, '.');
+			}
+			if (id == 4)
+			{
+				eventSource.loadJSON(wave4, '.');
+				eventSource.loadJSON(wave4LOOP, '.');
+			}
+			if (id == 5)
+			{
+				eventSource.loadJSON(wave5, '.');
+				eventSource.loadJSON(wave5LOOP, '.');
+			}
+        }
+        catch (error) {
+           // alert('Error:' + error);
+        }
+    }	
+	
+	
+	
+	function MoveTimeline() {
+	centerTimelineByInstruction(document.forms["form1"].elements["Texte"].value);
+		
+	}
+		
+ </script>
+   <body onload="onLoad();" onresize="onResize();">
+   
+    <div id="body"> 
+    
+  	
+	<br\> 
+	| Go to : &nbsp;<a href="javascript:centerTimelineByInstruction(0);">Wave 0</a> 
+	
+	<br\> <br\> 
+	 <FORM name="form1">
+		<INPUT type="text" name="Texte">
+		<BR>
+		<INPUT type="button" value="Move Timeline!"
+		onClick="MoveTimeline()">
+		</FORM>
+	</div>
+
+    <div class="controls" id="controls" style=" border: 1px solid #aaa"> 
+	 
+    </div> 
+	</div>
+</html>
