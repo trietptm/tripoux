@@ -1,0 +1,53 @@
+body {
+    margin-bottom: 20em;
+    font-family: Consolas, Trebuchet MS, Helvetica, Arial, sans serif;
+    background-color: #FFFFCC;
+}
+
+table {
+    font-size: 100%;
+}
+
+.timeline-default {
+    font-family: Consolas, Trebuchet MS, Helvetica, Arial, sans serif;
+    font-size: 8pt;
+    border: 1px solid #aaa;
+}
+
+.tape-special_event, .small-special_event {background-color: orange;}
+
+
+
+.footnotes {
+    background: #eee;
+    padding: 0.25em;
+}
+
+
+
+.controls {
+    margin: 1em 0;
+    padding: 0.5em;
+}
+
+.timeline-event-label{
+font-size:16px;
+}
+
+.timeline-event-bubble-title  {
+font-size:18px;
+border-bottom:1px solid #888888;
+font-family:Consolas,Trebuchet MS,Helvetica,Arial,sans serif;
+font-weight:bold;
+margin-bottom:0.5em;
+}
+
+.timeline-event-bubble-time  {
+color:#AAAAAA;
+visibility:hidden;
+}
+
+.timeline-event-bubble-body  {
+font-size:16px;
+font-family:Consolas,Trebuchet MS,Helvetica,Arial,sans serif;
+}
